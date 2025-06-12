@@ -18,30 +18,17 @@ const TASKS = [
 
 const App = () => {
   const [taskData, setTaskData] = useState(TASKS);
-  // const buttonClass = complete ? 'tasks__item__toggle--completed' : '';
 
-  // const toggleTaskPresence = (taskId) => {
-  //   const togglePresence = taskData.map(task => {
-  //     if (task.id === taskId) {
-  //       return { ...task, isComplete: !task.isComplete };
-  //     } else {
-  //       return task;
-  //     }
-  //   });
-
-  // setTaskData(togglePresence);
-  // };
-  const toggleTaskPresence = (TaskId) => {
+  const toggleTaskPresence = (id) => {
     setTaskData(taskData => {
       return taskData.map(task => {
-        if (task.id === TaskId) {
+        if (task.id === id) {
           return {...task, isComplete: !task.isComplete};
         } else {
           return task;
         }
       });
     });
-    setTaskData(setTaskData);
   };
 
 
@@ -52,7 +39,7 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList taskData={taskData} ontoggleTaskPresence = {toggleTaskPresence}/></div>
+          <TaskList tasks={taskData} ontoggleTaskPresence = {toggleTaskPresence}/></div>
       </main>
     </div>
   );

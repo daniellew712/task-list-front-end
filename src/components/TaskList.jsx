@@ -3,7 +3,7 @@ import Task from './Task.jsx';
 import './TaskList.css';
 
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, ontoggleTaskPresence }) => {
   const getTaskListJSX = (tasks) => {
     return tasks.map((task) => {
       return (
@@ -12,7 +12,7 @@ const TaskList = ({ tasks }) => {
           id={task.id}
           title={task.title}
           isComplete={task.isComplete}
-          ontogglePresence={task.ontoggleTaskPresence}
+          ontogglePresence={ontoggleTaskPresence}
         />
       );
     });
