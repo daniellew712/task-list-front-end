@@ -3,7 +3,7 @@ import Task from './Task.jsx';
 import './TaskList.css';
 
 
-const TaskList = ({ tasks, ontoggleTaskPresence }) => {
+const TaskList = ({ tasks, ontoggleTaskPresence, ondeleteTask }) => {
   const getTaskListJSX = (tasks) => {
     return tasks.map((task) => {
       return (
@@ -13,6 +13,7 @@ const TaskList = ({ tasks, ontoggleTaskPresence }) => {
           title={task.title}
           isComplete={task.isComplete}
           ontogglePresence={ontoggleTaskPresence}
+          ondeleteTask = {ondeleteTask}
         />
       );
     });
@@ -28,7 +29,8 @@ TaskList.propTypes = {
       isComplete: PropTypes.bool.isRequired,
     })
   ).isRequired,
-  ontoggleTaskPresence: PropTypes.func.isRequired
+  ontoggleTaskPresence: PropTypes.func.isRequired,
+  ondeleteTask: PropTypes.func.isRequired
 };
 
 export default TaskList;

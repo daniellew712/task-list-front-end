@@ -5,7 +5,7 @@ import './Task.css';
 
 
 
-const Task = ({id, title, isComplete, ontogglePresence}) => {
+const Task = ({id, title, isComplete, ontogglePresence, ondeleteTask}) => {
   const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
   return (
     <li className="tasks__item">
@@ -15,7 +15,8 @@ const Task = ({id, title, isComplete, ontogglePresence}) => {
       >
         {title}
       </button>
-      <button className="tasks__item__remove button">x</button>
+      <button className="tasks__item__remove button"
+        onClick={() => ondeleteTask(id)}>x</button>
     </li>
   );
 };
@@ -24,7 +25,8 @@ Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
-  ontogglePresence: PropTypes.func.isRequired
+  ontogglePresence: PropTypes.func.isRequired,
+  ondeleteTask: PropTypes.func.isRequired
 };
 
 export default Task;

@@ -30,7 +30,11 @@ const App = () => {
       });
     });
   };
-
+  const deleteTask = (id) =>{
+    setTaskData(taskData => {
+      return taskData.filter((task) => task.id != id);
+    });
+  };
 
   return (
     <div className="App">
@@ -39,7 +43,7 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList tasks={taskData} ontoggleTaskPresence = {toggleTaskPresence}/></div>
+          <TaskList tasks={taskData} ontoggleTaskPresence = {toggleTaskPresence} ondeleteTask = {deleteTask}/></div>
       </main>
     </div>
   );
