@@ -5,12 +5,17 @@ import axios from 'axios';
 import NewTaskForm from './components/NewTaskForm.jsx';
 
 const kBaseUrl = 'http://127.0.0.1:5000';
-const postTaskApi = (NewTaskData)=>{
-  console.log('try');
-  return axios.post(`${kBaseUrl}/tasks`,NewTaskData)
+// create API to call post task API
+const postTaskApi = (newTaskData)=> {
+  return axios.post(`${kBaseUrl}/tasks`,newTaskData)
   .then(response => {
-    // return response.data
-    console.log('try t');
+    const task = response.data.task;
+    return {
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        isComplete: task.is_complete,
+    };
   })
   .catch(error=>{
     console.log(error);
@@ -22,7 +27,12 @@ const getAllTasksApi = () => {
   return axios
     .get(`${kBaseUrl}/tasks`)
     .then((response) => {
-      return response.data;
+      return response.data.map(task => ({
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        isComplete: task.is_complete
+      }));
     })
     .catch((error) => {
       console.log(error);

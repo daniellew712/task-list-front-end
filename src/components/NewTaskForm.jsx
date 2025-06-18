@@ -1,35 +1,46 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const newTask = {
-    id :'',
-    title: '',
-    isComplete : '',
-};
 
 const NewTaskForm = ({ addTaskCallback }) => {
-  const [titleData, setTitleData] = useState(newTask.title);
-
+  const [titleData, setTitleData] = useState('');
+  const [descriptionData, setDescriptionData] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
-    addTaskCallback({ title: titleData });
+    const newTask = {
+        title: titleData,
+        description: descriptionData,
+};
+
+    addTaskCallback(newTask);
     setTitleData('');
+    setDescriptionData('');
   };
 
   const handleChange = (event) => {
-    setTitleData(event.target.value);
+    setDescriptionData(event.target.value);
   };
 
   return (
     <form onSubmit={handleSubmit}>
+    <div>
+        <label htmlFor="input-title">Title:</label>
+        <input
+          type="text"
+          id="input-title"
+          name="title"
+          value={titleData}
+          onChange={(e) => setTitleData(e.target.value)}
+        />
+      </div>
       <div>
-        <label htmlFor='input-title'>:</label>
+        <label htmlFor='input-description'>Description:</label>
         <input
           onChange={handleChange}
           type='text'
-          id='input-title'
-          name='title'
-          value={titleData}
+          id='input-description'
+          name='description'
+          value={descriptionData}
         />
       </div>
       <div>
