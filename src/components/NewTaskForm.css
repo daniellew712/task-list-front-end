@@ -1,0 +1,22 @@
+
+
+.form-button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
+div.input-group {
+    display: flex;
+    flex-direction: row; 
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    
+}
