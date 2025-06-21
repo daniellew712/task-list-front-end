@@ -8,18 +8,18 @@ const kBaseUrl = 'http://127.0.0.1:5000';
 // create API to call post task API
 const postTaskApi = (newTaskData)=> {
   return axios.post(`${kBaseUrl}/tasks`,newTaskData)
-  .then(response => {
-    const task = response.data.task;
-    return {
+    .then(response => {
+      const task = response.data.task;
+      return {
         id: task.id,
         title: task.title,
         description: task.description,
         isComplete: task.is_complete,
-    };
-  })
-  .catch(error=>{
-    console.log(error);
-  });
+      };
+    })
+    .catch(error=>{
+      console.log(error);
+    });
 };
 
 // GET all tasks
@@ -56,6 +56,7 @@ const App = () => {
   const getAllTasks = () => {
     return getAllTasksApi().then((tasks) => setTaskData(tasks));
   };
+  // call when we mount
   useEffect(() => {
     getAllTasks();
   }, []);
@@ -83,9 +84,9 @@ const App = () => {
   };
   const postTask =(newTaskData)=>{
     postTaskApi(newTaskData)
-    .then(newTask=>{
-      setTaskData(prevTasks => [newTask,...prevTasks]);
-    });
+      .then(newTask=>{
+        setTaskData(prevTasks => [newTask,...prevTasks]);
+      });
   };
   return (
     <div className="App">
@@ -99,7 +100,7 @@ const App = () => {
             ontoggleTaskPresence={toggleTaskPresence}
             ondeleteTask={deleteTask}
           />
-          <NewTaskForm addTaskCallback ={postTask}/>
+          <NewTaskForm onPostTask ={postTask}/>
         </div>
       </main>
     </div>

@@ -1,49 +1,55 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import './NewTaskForm.css';
 
+// create function for new task form
+const NewTaskForm = ({ onPostTask }) => {
+  // current state value is titleData, setTitleData is the function to update state
+  // useState is a hook to remember vlaues between renders
 
-const NewTaskForm = ({ addTaskCallback }) => {
   const [titleData, setTitleData] = useState('');
   const [descriptionData, setDescriptionData] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const newTask = {
-        title: titleData,
-        description: descriptionData,
-};
-
-    addTaskCallback(newTask);
+      title: titleData,
+      description: descriptionData,
+    };
+    // notify the application about the data
+    onPostTask(newTask);
+    // reset the state
     setTitleData('');
     setDescriptionData('');
   };
 
-  const handleChange = (event) => {
+  const handleTitle = (event) => {
+    setTitleData(event.target.value);
+  };
+  const handleDescription = (event) => {
     setDescriptionData(event.target.value);
   };
-
   return (
     <form onSubmit={handleSubmit}>
-    <div>
+      <div className='input-group'>
         <label htmlFor="input-title">Title:</label>
         <input
+          onChange={handleTitle}
           type="text"
+          // The id is used to uniquely identify this specific input field in the HTML.
           id="input-title"
           name="title"
+          // binds input field with react state
           value={titleData}
-          onChange={(e) => setTitleData(e.target.value)}
+          // onChange={(e) => setTitleData(e.target.value)}
         />
-      </div>
-      <div>
         <label htmlFor='input-description'>Description:</label>
         <input
-          onChange={handleChange}
+          onChange={handleDescription}
           type='text'
           id='input-description'
           name='description'
           value={descriptionData}
         />
-      </div>
-      <div>
         <button className="form-button">Add Task</button>
       </div>
     </form>
@@ -51,7 +57,9 @@ const NewTaskForm = ({ addTaskCallback }) => {
 };
 
 NewTaskForm.propTypes = {
-  addTaskCallback: PropTypes.func.isRequired,
+  onPostTask: PropTypes.func.isRequired,
 };
 
 export default NewTaskForm;
+
+
